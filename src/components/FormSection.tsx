@@ -74,7 +74,7 @@ const FormSection: React.FC = () => {
               method="POST" 
               className="space-y-4">
           <input type="hidden" name="oid" value="00DHr00000KvcPl" />
-          <input type="hidden" name="retURL" value="https://attract-leads-hub.lovable.app/gracias" />
+          <input type="hidden" name="retURL" value="https://attract-leads-hub.lovableproject.com/gracias" />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -133,7 +133,7 @@ const FormSection: React.FC = () => {
                 <SelectValue placeholder="Selecciona un estado" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">--Ninguno--</SelectItem>
+                <SelectItem value="ninguno">--Ninguno--</SelectItem>
                 <SelectItem value="Aguascalientes">Aguascalientes</SelectItem>
                 <SelectItem value="Baja California">Baja California</SelectItem>
                 <SelectItem value="Baja California Sur">Baja California Sur</SelectItem>
@@ -202,7 +202,7 @@ const FormSection: React.FC = () => {
                 <SelectValue placeholder="Selecciona una opción" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">--Ninguno--</SelectItem>
+                <SelectItem value="ninguno">--Ninguno--</SelectItem>
                 <SelectItem value="1-10">1-10</SelectItem>
                 <SelectItem value="10-50">10-50</SelectItem>
                 <SelectItem value="50-100">50-100</SelectItem>
@@ -221,7 +221,7 @@ const FormSection: React.FC = () => {
                 <SelectValue placeholder="Selecciona una opción" />
               </SelectTrigger>
               <SelectContent>
-                <SelectItem value="">--Ninguno--</SelectItem>
+                <SelectItem value="ninguno">--Ninguno--</SelectItem>
                 <SelectItem value="Sí">Sí</SelectItem>
                 <SelectItem value="No">No</SelectItem>
               </SelectContent>
