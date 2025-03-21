@@ -12,16 +12,15 @@ const FormSection: React.FC = () => {
   const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
-    nombre: '',
-    apellidos: '',
-    posicion: '',
+    first_name: '',
+    last_name: '',
     email: '',
-    telefono: '',
-    empresa: '',
-    empleados: '',
-    estado: '',
-    ciudad: '',
-    avisoPrivacidad: '',
+    phone: '',
+    company: '',
+    '00NHr00001YjnIG': '',
+    '00NHr00001YjnIB': '',
+    city: '',
+    '00NHr00001YjnIL': '',
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
@@ -40,12 +39,9 @@ const FormSection: React.FC = () => {
   };
 
   const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
     setIsSubmitting(true);
     
-    // Simulación de envío
-    console.log("Datos del formulario:", formData);
-    
+    // Solo para mostrar un toast y redirigir, el formulario manejará el envío real
     setTimeout(() => {
       setIsSubmitting(false);
       toast({
@@ -53,9 +49,8 @@ const FormSection: React.FC = () => {
         description: "Un representante se pondrá en contacto contigo pronto.",
       });
       
-      // Redireccionar a la página de gracias
-      navigate('/gracias');
-    }, 1500);
+      // La redirección se hará a través del parámetro retURL del formulario
+    }, 1000);
   };
 
   return (
@@ -72,6 +67,7 @@ const FormSection: React.FC = () => {
         
         <form action="https://webto.salesforce.com/servlet/servlet.WebToLead?encoding=UTF-8&orgId=00DHr00000KvcPl" 
               method="POST" 
+              onSubmit={handleSubmit}
               className="space-y-4">
           <input type="hidden" name="oid" value="00DHr00000KvcPl" />
           <input type="hidden" name="retURL" value="https://attract-leads-hub.lovableproject.com/gracias" />
@@ -126,7 +122,7 @@ const FormSection: React.FC = () => {
           <div className="space-y-2">
             <Label htmlFor="00NHr00001YjnIB">Estado</Label>
             <Select 
-              onValueChange={(value) => handleSelectChange('estado', value)}
+              onValueChange={(value) => handleSelectChange('00NHr00001YjnIB', value)}
               name="00NHr00001YjnIB"
             >
               <SelectTrigger className="w-full">
@@ -195,7 +191,7 @@ const FormSection: React.FC = () => {
           <div className="space-y-2">
             <Label htmlFor="00NHr00001YjnIG">Tamaño de Flota</Label>
             <Select 
-              onValueChange={(value) => handleSelectChange('empleados', value)}
+              onValueChange={(value) => handleSelectChange('00NHr00001YjnIG', value)}
               name="00NHr00001YjnIG"
             >
               <SelectTrigger className="w-full">
@@ -214,7 +210,7 @@ const FormSection: React.FC = () => {
           <div className="space-y-2">
             <Label htmlFor="00NHr00001YjnIL">Aviso Privacidad</Label>
             <Select 
-              onValueChange={(value) => handleSelectChange('avisoPrivacidad', value)}
+              onValueChange={(value) => handleSelectChange('00NHr00001YjnIL', value)}
               name="00NHr00001YjnIL"
             >
               <SelectTrigger className="w-full">
