@@ -1,6 +1,6 @@
 
 import React from 'react';
-import { CheckIcon } from "lucide-react";
+import { CheckIcon, TruckIcon, BadgeCheckIcon, MapPinIcon } from "lucide-react";
 
 const LeftSection: React.FC = () => {
   return (
@@ -20,7 +20,7 @@ const LeftSection: React.FC = () => {
           </p>
         </div>
         
-        <div className="space-y-4">
+        <div className="space-y-5">
           <h2 className="text-xl md:text-2xl font-bold text-white mb-4">
             Nuestros productos:
           </h2>
@@ -30,7 +30,9 @@ const LeftSection: React.FC = () => {
               "Cajas Secas",
               "Cajas Refrigeradas",
               "Plataformas",
-              "Encortinados marca Utility"
+              "Encortinados marca Utility",
+              "Dollys marca Óptima",
+              "Tolvas para alimento"
             ].map((item, index) => (
               <div key={index} className="flex items-start gap-2">
                 <div className="flex-shrink-0 w-5 h-5 mt-0.5 rounded-full bg-green-500 flex items-center justify-center">
@@ -41,7 +43,33 @@ const LeftSection: React.FC = () => {
             ))}
           </div>
           
-          <div className="mt-6">
+          <div className="mt-4 space-y-4">
+            <div className="flex items-start gap-3">
+              <TruckIcon className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-white font-medium">Servicio Integral</h3>
+                <p className="text-white/80 text-sm">Ofrecemos asesoría, venta de equipos, refacciones y servicio técnico especializado.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3">
+              <BadgeCheckIcon className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-white font-medium">Calidad Garantizada</h3>
+                <p className="text-white/80 text-sm">Todos nuestros productos cumplen con los más altos estándares de calidad y seguridad.</p>
+              </div>
+            </div>
+            
+            <div className="flex items-start gap-3">
+              <MapPinIcon className="w-5 h-5 text-green-400 flex-shrink-0 mt-1" />
+              <div>
+                <h3 className="text-white font-medium">Presencia Nacional</h3>
+                <p className="text-white/80 text-sm">3 centros integrales en CDMX, Guadalajara y Monterrey, y 14 sucursales en todo México.</p>
+              </div>
+            </div>
+          </div>
+          
+          <div className="mt-5 pt-3 border-t border-white/20">
             <p className="text-white">
               ¿Tienes dudas? Contáctanos al teléfono: <span className="font-bold">+52 (55) 1234-5678</span>
             </p>
