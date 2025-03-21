@@ -76,7 +76,7 @@ const Index: React.FC = () => {
         <div className="max-w-lg mx-auto">
           <div className="mb-8">
             <img 
-              src="/lovable-uploads/6ad712de-1728-4de8-b0c5-79ee1b243f96.png" 
+              src="/lovable-uploads/af180f94-fe07-449d-8254-507824d2c054.png" 
               alt="Utility Logo" 
               className="w-40 mb-8"
             />
