@@ -4,24 +4,24 @@ import { CheckIcon } from "lucide-react";
 
 const LeftSection: React.FC = () => {
   return (
-    <div className="w-full md:w-1/2 bg-utility-darkBlue p-8 md:p-12 flex flex-col justify-center overflow-y-auto max-h-screen">
+    <div className="w-full md:w-1/2 bg-utility-darkBlue p-6 md:p-8 lg:p-12 flex flex-col justify-start overflow-y-auto max-h-screen">
       <div className="max-w-lg mx-auto">
-        <div className="mb-8">
+        <div className="mb-6 md:mb-8">
           <img 
             src="/lovable-uploads/af180f94-fe07-449d-8254-507824d2c054.png" 
             alt="Utility Logo" 
-            className="w-40 mb-8"
+            className="w-32 md:w-40 mb-6 md:mb-8"
           />
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+          <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white mb-4 md:mb-6 leading-tight">
             Líderes en equipos de transporte en México
           </h1>
-          <p className="text-xl text-white/80 mb-6">
+          <p className="text-lg md:text-xl text-white/80 mb-6">
             Con 30 años de experiencia, somos distribuidor exclusivo de Utility Trailers en México y Centroamérica.
           </p>
         </div>
         
-        <div className="space-y-6">
-          <h2 className="text-2xl font-bold text-white mb-6">
+        <div className="space-y-4 md:space-y-6">
+          <h2 className="text-xl md:text-2xl font-bold text-white mb-4 md:mb-6">
             Nuestros productos:
           </h2>
           
@@ -43,14 +43,14 @@ const LeftSection: React.FC = () => {
             </div>
           ))}
           
-          <div className="mt-8">
-            <h2 className="text-2xl font-bold text-white mb-4">
+          <div className="mt-6 md:mt-8">
+            <h2 className="text-xl md:text-2xl font-bold text-white mb-3 md:mb-4">
               Presencia nacional:
             </h2>
-            <p className="text-white mb-4">
+            <p className="text-white mb-3 md:mb-4">
               3 centros integrales de venta de equipos, refacciones y servicio en:
             </p>
-            <ul className="list-disc pl-5 text-white mb-4">
+            <ul className="list-disc pl-5 text-white mb-3 md:mb-4">
               <li>Cuautitlán Izcalli, Edo. Mex.</li>
               <li>Guadalajara, Jal.</li>
               <li>Monterrey, NL.</li>
