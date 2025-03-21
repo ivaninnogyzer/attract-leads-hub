@@ -5,7 +5,7 @@ import { CheckIcon } from "lucide-react";
 const LeftSection: React.FC = () => {
   return (
     <div className="w-full md:w-1/2 bg-utility-darkBlue p-6 md:p-8 lg:p-12 flex flex-col justify-start overflow-y-auto max-h-screen">
-      <div className="max-w-lg mx-auto">
+      <div className="w-full max-w-lg mx-auto my-6">
         <div className="mb-6 md:mb-8">
           <img 
             src="/lovable-uploads/af180f94-fe07-449d-8254-507824d2c054.png" 
