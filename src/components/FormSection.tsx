@@ -6,6 +6,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { useNavigate } from 'react-router-dom';
+import { Checkbox } from "@/components/ui/checkbox";
 
 const FormSection: React.FC = () => {
   const { toast } = useToast();
@@ -20,8 +21,9 @@ const FormSection: React.FC = () => {
     '00NHr00001YjnIG': '',
     '00NHr00001YjnIB': '',
     city: '',
-    '00NHr00001YjnIL': '',
+    '00NHr00001YjnIL': 'No',
   });
+  const [acceptPrivacy, setAcceptPrivacy] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     const { name, value } = e.target;
@@ -35,6 +37,14 @@ const FormSection: React.FC = () => {
     setFormData(prev => ({
       ...prev,
       [name]: value
+    }));
+  };
+
+  const handlePrivacyChange = (checked: boolean) => {
+    setAcceptPrivacy(checked);
+    setFormData(prev => ({
+      ...prev,
+      '00NHr00001YjnIL': checked ? 'Sí' : 'No'
     }));
   };
 
@@ -71,6 +81,7 @@ const FormSection: React.FC = () => {
               className="space-y-4">
           <input type="hidden" name="oid" value="00DHr00000KvcPl" />
           <input type="hidden" name="retURL" value="https://attract-leads-hub.lovableproject.com/gracias" />
+          <input type="hidden" name="00NHr00001YjnIL" value={formData['00NHr00001YjnIL']} />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="space-y-2">
@@ -207,28 +218,23 @@ const FormSection: React.FC = () => {
             </Select>
           </div>
           
-          <div className="space-y-2">
-            <Label htmlFor="00NHr00001YjnIL">Aviso Privacidad</Label>
-            <Select 
-              onValueChange={(value) => handleSelectChange('00NHr00001YjnIL', value)}
-              name="00NHr00001YjnIL"
-            >
-              <SelectTrigger className="w-full">
-                <SelectValue placeholder="Selecciona una opción" />
-              </SelectTrigger>
-              <SelectContent>
-                <SelectItem value="ninguno">--Ninguno--</SelectItem>
-                <SelectItem value="Sí">Sí</SelectItem>
-                <SelectItem value="No">No</SelectItem>
-              </SelectContent>
-            </Select>
+          <div className="flex items-center space-x-2 my-4">
+            <Checkbox 
+              id="privacy" 
+              checked={acceptPrivacy} 
+              onCheckedChange={handlePrivacyChange}
+              required
+            />
+            <Label htmlFor="privacy" className="text-sm text-gray-700">
+              Acepto el aviso de privacidad y políticas de uso de datos
+            </Label>
           </div>
           
           <div className="pt-4">
             <Button 
               type="submit" 
               className="w-full bg-utility-blue hover:bg-utility-blue/90 text-white text-lg py-6"
-              disabled={isSubmitting}
+              disabled={isSubmitting || !acceptPrivacy}
             >
               {isSubmitting ? (
                 <span className="flex items-center justify-center">
