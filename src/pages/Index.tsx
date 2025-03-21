@@ -1,203 +1,279 @@
 
-import React, { useEffect } from 'react';
-import AnimatedBackground from '@/components/AnimatedBackground';
-import NavBar from '@/components/NavBar';
-import Hero from '@/components/Hero';
-import Features from '@/components/Features';
-import LeadForm from '@/components/LeadForm';
-import Footer from '@/components/Footer';
+import React, { useEffect, useState } from 'react';
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import { Textarea } from "@/components/ui/textarea";
+import { Button } from "@/components/ui/button";
+import { useToast } from "@/components/ui/use-toast";
+import { CheckIcon } from "lucide-react";
 
 const Index: React.FC = () => {
+  const { toast } = useToast();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formData, setFormData] = useState({
+    nombre: '',
+    apellidos: '',
+    posicion: '',
+    email: '',
+    telefono: '',
+    empresa: '',
+    empleados: '',
+    pais: 'México',
+  });
+
   useEffect(() => {
-    // Smooth scroll for hash links
-    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-      anchor.addEventListener('click', function (e) {
-        e.preventDefault();
-        
-        const target = document.querySelector(this.getAttribute('href') || '');
-        if (target) {
-          window.scrollTo({
-            top: (target as HTMLElement).offsetTop - 80, // Offset for the fixed navbar
-            behavior: 'smooth'
-          });
-        }
-      });
-    });
-    
-    // Animate elements on scroll
-    const handleScroll = () => {
-      const revealElements = document.querySelectorAll('.reveal-on-scroll');
-      
-      revealElements.forEach(element => {
-        const elementTop = element.getBoundingClientRect().top;
-        const elementVisible = 150;
-        
-        if (elementTop < window.innerHeight - elementVisible) {
-          element.classList.add('animate-reveal');
-        }
-      });
-    };
-    
-    window.addEventListener('scroll', handleScroll);
-    // Initial check
-    handleScroll();
-    
-    return () => {
-      window.removeEventListener('scroll', handleScroll);
-    };
-  }, []);
-  
-  useEffect(() => {
-    // Update document title
-    document.title = 'Utility | Soluciones para la gestión de servicios empresariales';
+    document.title = 'Utility | Experimenta nuestra solución completa de servicios empresariales';
   }, []);
 
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSelectChange = (name: string, value: string) => {
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    setIsSubmitting(true);
+    
+    // Simulación de envío
+    console.log("Datos del formulario:", formData);
+    
+    setTimeout(() => {
+      setIsSubmitting(false);
+      toast({
+        title: "Formulario enviado con éxito",
+        description: "Un representante se pondrá en contacto contigo pronto.",
+      });
+      
+      // Restablecer formulario
+      setFormData({
+        nombre: '',
+        apellidos: '',
+        posicion: '',
+        email: '',
+        telefono: '',
+        empresa: '',
+        empleados: '',
+        pais: 'México',
+      });
+    }, 1500);
+  };
+
   return (
-    <div className="relative min-h-screen bg-white overflow-hidden">
-      <AnimatedBackground />
-      <NavBar />
-      
-      <main>
-        <Hero />
-        
-        <section id="beneficios" className="py-20 px-6 md:px-10 relative">
-          <div className="max-w-7xl mx-auto">
-            <div className="max-w-2xl mx-auto text-center mb-16 reveal-on-scroll" style={{ '--reveal-delay': 0 } as React.CSSProperties}>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-utility-blue text-sm font-medium mb-4">
-                Beneficios
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-utility-darkBlue">
-                Optimiza recursos y maximiza resultados
-              </h2>
-              <p className="text-lg text-gray-600">
-                Al trabajar con Utility, tu empresa obtiene ventajas competitivas inmediatas. Estas son algunas de las razones por las que nuestros clientes confían en nosotros.
-              </p>
-            </div>
-            
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10">
-              {[
-                {
-                  title: 'Reducción de costos',
-                  description: 'Optimizamos tus recursos para reducir gastos operativos hasta en un 30% en servicios básicos.',
-                  icon: (
-                    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z" />
-                    </svg>
-                  ),
-                  delay: 1
-                },
-                {
-                  title: 'Eficiencia energética',
-                  description: 'Implementamos soluciones para reducir el consumo energético y minimizar el impacto ambiental.',
-                  icon: (
-                    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 10V3L4 14h7v7l9-11h-7z" />
-                    </svg>
-                  ),
-                  delay: 2
-                },
-                {
-                  title: 'Monitoreo en tiempo real',
-                  description: 'Accede a información actualizada sobre el consumo y estado de tus servicios en cualquier momento.',
-                  icon: (
-                    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                    </svg>
-                  ),
-                  delay: 3
-                },
-                {
-                  title: 'Mantenimiento predictivo',
-                  description: 'Anticipamos necesidades de mantenimiento para prevenir fallas y minimizar tiempos de inactividad.',
-                  icon: (
-                    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                  ),
-                  delay: 4
-                },
-                {
-                  title: 'Escalabilidad',
-                  description: 'Nuestras soluciones crecen con tu empresa, adaptándose a tus necesidades cambiantes.',
-                  icon: (
-                    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15" />
-                    </svg>
-                  ),
-                  delay: 5
-                },
-                {
-                  title: 'Tecnología de vanguardia',
-                  description: 'Implementamos las soluciones más innovadoras para garantizar resultados óptimos.',
-                  icon: (
-                    <svg className="h-8 w-8" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z" />
-                    </svg>
-                  ),
-                  delay: 6
-                },
-              ].map((benefit, idx) => (
-                <div 
-                  key={idx}
-                  className="glass-card p-8 rounded-2xl cursor-default reveal-on-scroll"
-                  style={{ '--reveal-delay': benefit.delay } as React.CSSProperties}
-                >
-                  <div className="mb-5 flex h-14 w-14 items-center justify-center rounded-xl bg-blue-50 text-utility-blue">
-                    {benefit.icon}
-                  </div>
-                  <h3 className="mb-3 text-xl font-semibold text-utility-darkBlue">{benefit.title}</h3>
-                  <p className="text-gray-600">{benefit.description}</p>
-                </div>
-              ))}
-            </div>
+    <div className="flex flex-col md:flex-row min-h-screen">
+      {/* Sección izquierda - Información */}
+      <div className="w-full md:w-1/2 bg-utility-darkBlue p-8 md:p-12 flex flex-col justify-center">
+        <div className="max-w-lg mx-auto">
+          <div className="mb-8">
+            <img 
+              src="/lovable-uploads/6ad712de-1728-4de8-b0c5-79ee1b243f96.png" 
+              alt="Utility Logo" 
+              className="w-40 mb-8"
+            />
+            <h1 className="text-3xl md:text-4xl lg:text-5xl font-bold text-white mb-6">
+              Experimenta nuestra solución completa de servicios empresariales
+            </h1>
+            <p className="text-xl text-white/80 mb-10">
+              Optimiza recursos y maximiza resultados con nuestra plataforma integral
+            </p>
           </div>
-        </section>
-        
-        <Features />
-        
-        <section className="py-20 px-6 md:px-10 relative">
-          <div className="absolute inset-0 bg-gradient-to-b from-white to-gray-50 z-0" />
           
-          <div className="relative z-10 max-w-7xl mx-auto">
-            <div className="max-w-3xl mx-auto text-center mb-16 reveal-on-scroll" style={{ '--reveal-delay': 0 } as React.CSSProperties}>
-              <span className="inline-block px-4 py-1.5 rounded-full bg-blue-50 text-utility-blue text-sm font-medium mb-4">
-                Confianza
-              </span>
-              <h2 className="text-3xl md:text-4xl font-bold mb-6 text-utility-darkBlue">
-                Empresas que confían en Utility
-              </h2>
-              <p className="text-lg text-gray-600">
-                Nos enorgullece trabajar con compañías líderes de diversos sectores que han optimizado sus servicios con nuestras soluciones.
+          <div className="space-y-6">
+            <h2 className="text-2xl font-bold text-white mb-6">
+              Con Utility, obtienes:
+            </h2>
+            
+            {[
+              "Soluciones personalizadas para cada tipo de negocio",
+              "Procesos, informes y dashboards pre-configurados",
+              "Recorridos guiados para representantes y gerentes",
+              "Guías y materiales sobre mejores prácticas",
+              "Capacitación integrada y entrenamientos online",
+              "Configuración de seguimiento de leads",
+              "Herramientas para automatización de tareas",
+              "Visión completa de rendimiento y estadísticas"
+            ].map((item, index) => (
+              <div key={index} className="flex items-start gap-3">
+                <div className="flex-shrink-0 w-5 h-5 mt-1 rounded-full bg-green-500 flex items-center justify-center">
+                  <CheckIcon className="w-3 h-3 text-white" />
+                </div>
+                <span className="text-white">{item}</span>
+              </div>
+            ))}
+            
+            <div className="pt-4">
+              <p className="text-white">
+                ¿Tienes dudas? Contáctanos al teléfono: <span className="font-bold">+52 (55) 1234-5678</span>
               </p>
             </div>
-            
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8 md:gap-12 max-w-4xl mx-auto">
-              {Array.from({ length: 8 }).map((_, idx) => (
-                <div 
-                  key={idx} 
-                  className="h-20 flex items-center justify-center rounded-xl bg-white border border-gray-100 shadow-sm hover:shadow-md transition-all duration-300 reveal-on-scroll" 
-                  style={{ '--reveal-delay': Math.floor(idx / 4) + 1 } as React.CSSProperties}
-                >
-                  <div className="text-2xl font-bold text-gray-300">LOGO {idx + 1}</div>
-                </div>
-              ))}
-            </div>
-            
-            <div className="mt-16 text-center reveal-on-scroll" style={{ '--reveal-delay': 3 } as React.CSSProperties}>
-              <a 
-                href="#contacto" 
-                className="utility-button"
-              >
-                Sé parte de nuestros casos de éxito
-              </a>
-            </div>
           </div>
-        </section>
-        
-        <LeadForm />
-      </main>
+        </div>
+      </div>
       
-      <Footer />
+      {/* Sección derecha - Formulario */}
+      <div className="w-full md:w-1/2 bg-gray-50 p-8 md:p-12 flex items-center justify-center">
+        <div className="w-full max-w-md">
+          <div className="mb-8">
+            <h2 className="text-2xl font-bold text-utility-darkBlue">
+              Regístrate para comenzar tu prueba gratuita
+            </h2>
+            <p className="text-gray-600 mt-2">
+              Rellene el siguiente formulario y, en breve, un representante se pondrá en contacto con usted.
+            </p>
+          </div>
+          
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="space-y-2">
+                <Label htmlFor="nombre">Nombre</Label>
+                <Input
+                  id="nombre"
+                  name="nombre"
+                  placeholder="Tu nombre"
+                  value={formData.nombre}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+              
+              <div className="space-y-2">
+                <Label htmlFor="apellidos">Apellidos</Label>
+                <Input
+                  id="apellidos"
+                  name="apellidos"
+                  placeholder="Tus apellidos"
+                  value={formData.apellidos}
+                  onChange={handleChange}
+                  required
+                />
+              </div>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="posicion">Posición</Label>
+              <Input
+                id="posicion"
+                name="posicion"
+                placeholder="Tu cargo en la empresa"
+                value={formData.posicion}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="email">Correo electrónico</Label>
+              <Input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="tu@email.com"
+                value={formData.email}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="telefono">Teléfono</Label>
+              <Input
+                id="telefono"
+                name="telefono"
+                placeholder="+52 (55) 1234-5678"
+                value={formData.telefono}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="empresa">Empresa</Label>
+              <Input
+                id="empresa"
+                name="empresa"
+                placeholder="Nombre de tu empresa"
+                value={formData.empresa}
+                onChange={handleChange}
+                required
+              />
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="empleados">Cantidad de empleados</Label>
+              <Select 
+                value={formData.empleados} 
+                onValueChange={(value) => handleSelectChange('empleados', value)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Selecciona una opción" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="1-10">1-10 empleados</SelectItem>
+                  <SelectItem value="11-50">11-50 empleados</SelectItem>
+                  <SelectItem value="51-200">51-200 empleados</SelectItem>
+                  <SelectItem value="201-500">201-500 empleados</SelectItem>
+                  <SelectItem value="501+">Más de 500 empleados</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="space-y-2">
+              <Label htmlFor="pais">País/Región</Label>
+              <Select 
+                value={formData.pais} 
+                onValueChange={(value) => handleSelectChange('pais', value)}
+              >
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="Selecciona una opción" />
+                </SelectTrigger>
+                <SelectContent>
+                  <SelectItem value="México">México</SelectItem>
+                  <SelectItem value="Estados Unidos">Estados Unidos</SelectItem>
+                  <SelectItem value="Colombia">Colombia</SelectItem>
+                  <SelectItem value="Argentina">Argentina</SelectItem>
+                  <SelectItem value="Chile">Chile</SelectItem>
+                  <SelectItem value="Perú">Perú</SelectItem>
+                  <SelectItem value="España">España</SelectItem>
+                  <SelectItem value="Otro">Otro</SelectItem>
+                </SelectContent>
+              </Select>
+            </div>
+            
+            <div className="pt-4">
+              <Button 
+                type="submit" 
+                className="w-full bg-utility-blue hover:bg-utility-blue/90 text-white text-lg py-6"
+                disabled={isSubmitting}
+              >
+                {isSubmitting ? (
+                  <span className="flex items-center justify-center">
+                    <svg className="animate-spin -ml-1 mr-2 h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                      <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                      <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                    </svg>
+                    Enviando...
+                  </span>
+                ) : (
+                  'Contacto'
+                )}
+              </Button>
+              <p className="text-sm text-gray-500 mt-2 text-center">
+                Al enviar este formulario, aceptas nuestra política de privacidad.
+              </p>
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
   );
 };
