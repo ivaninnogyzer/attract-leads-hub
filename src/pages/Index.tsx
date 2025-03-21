@@ -1,15 +1,15 @@
-
 import React, { useEffect, useState } from 'react';
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
 import { CheckIcon } from "lucide-react";
+import { useNavigate } from "react-router-dom";
 
 const Index: React.FC = () => {
   const { toast } = useToast();
+  const navigate = useNavigate();
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [formData, setFormData] = useState({
     nombre: '',
@@ -50,22 +50,10 @@ const Index: React.FC = () => {
     
     setTimeout(() => {
       setIsSubmitting(false);
-      toast({
-        title: "Formulario enviado con éxito",
-        description: "Un representante se pondrá en contacto contigo pronto.",
-      });
       
-      // Restablecer formulario
-      setFormData({
-        nombre: '',
-        apellidos: '',
-        posicion: '',
-        email: '',
-        telefono: '',
-        empresa: '',
-        empleados: '',
-        pais: 'México',
-      });
+      // Redirigir a la página de agradecimiento en lugar de mostrar una notificación
+      navigate('/gracias');
+      
     }, 1500);
   };
 
