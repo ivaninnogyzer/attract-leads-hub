@@ -80,7 +80,7 @@ const FormSection: React.FC = () => {
               onSubmit={handleSubmit}
               className="space-y-4">
           <input type="hidden" name="oid" value="00DHr00000KvcPl" />
-          <input type="hidden" name="retURL" value="https://attract-leads-hub.lovableproject.com/gracias" />
+          <input type="hidden" name="retURL" value="https://attract-leads-hub.lovable.app/gracias" />
           <input type="hidden" name="00NHr00001YjnIL" value={formData['00NHr00001YjnIL']} />
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
